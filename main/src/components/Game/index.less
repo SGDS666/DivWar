@@ -1,0 +1,72 @@
+.game{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    color: white;
+    background-color: black;
+    // display: flex;
+    .mousepost{
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid rgb(168, 250, 168);
+        animation: mouseboth forwards 0.8s linear;
+    }
+    .table{
+        min-width: 100px;
+        min-height: 100px;
+        background-color: rgba(13, 209, 160, 0.445);
+        position: absolute;
+        border-radius: 2%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .tbar{
+        width: 95%;
+        height: 4vh;
+        // background-color: red;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: bold;
+    }
+    .hero{
+        position: absolute;
+        .bloodbar{
+            width: 6vw;
+            height: 1vh;
+            position: absolute;
+            top: -2vh;
+            left: -50%;
+            background-color: rgb(113, 255, 113);
+        }
+        .herobody{
+            width: 3vw;
+            height:3vw;
+            background-color: white;
+        }
+        
+    }
+}
+
+@keyframes mouseboth {
+    0%{
+        transform: scale(50%);
+        border: 3px solid rgb(168, 250, 168);
+        box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.575);
+        
+    }
+    40%{
+        transform: scale(100%);
+        border: 1px solid rgba(168, 250, 168, 0.438);
+        box-shadow: 0px 0px 10px 10px rgba(150, 226, 215, 0.397);
+        
+    }
+    100%{
+        transform: scale(200%);
+        border: none;
+        box-shadow: none;
+    }
+}
