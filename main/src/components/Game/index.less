@@ -14,14 +14,15 @@
         animation: mouseboth forwards 0.8s linear;
     }
     .table{
-        min-width: 100px;
-        min-height: 100px;
+        min-width: 10px;
+        min-height: 10px;
         background-color: rgba(13, 209, 160, 0.445);
         position: absolute;
         border-radius: 2%;
         display: flex;
         align-items: center;
         flex-direction: column;
+        
     }
     .tbar{
         width: 95%;
@@ -46,9 +47,19 @@
             width: 3vw;
             height:3vw;
             background-color: white;
+            border-top: 20px solid blue;
         }
         
     }
+    .timebar{
+        width: 100%;
+        height: 100%;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
 }
 
 @keyframes mouseboth {

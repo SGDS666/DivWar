@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-pascal-case */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import GTime from './GTime'
 import './index.css'
 
-const 属性条 = ({name,value}) => {
+const 属性条 = ({ name, value }) => {
     return (
         <div className='tbar'>
             <div className='tname'>{name}</div>
@@ -12,68 +14,85 @@ const 属性条 = ({name,value}) => {
     )
 }
 
-
-const 属性面板data = {left:"0.2vw",top:'0.5vh',width:'15vw',height:"30vh"} 
-const 技能面板data = {left:"0.2vw",top:'59vh',width:'15vw',height:"40vh"} 
+const 关卡面板data = { left: "40vw", top: '0.5vh', width: '20vw', height: "5vh" }
+const 时间面板data = { right: "0.5vw", top: '0.5vh', width: '10vw', height: "5vh" }
+const 属性面板data = { left: "0.2vw", top: '0.5vh', width: '15vw', height: "30vh" }
+const 技能面板data = { left: "0.2vw", top: '59vh', width: '15vw', height: "40vh" }
 const 面板 = (props) => {
-    const {data} = props
+    const { data } = props
     return (
-        <div 
-        className='table'
-        style={{...data}}
+        <div
+            className='table'
+            style={{ ...data }}
         >
             {props.children}
         </div>
     )
 }
 
-const initxy =  {left:"40vw",top:'40vh'}
-const 英雄 = ({xy=initxy}) => {
+const initxy = { left: "40vw", top: '40vh' }
+const 英雄 = ({ xy = initxy }) => {
+    const bodyref = useRef('body')
+    const 方向判断 = (xy) => {
+        const x = bodyref.current.offsetLeft
+        const y = bodyref.current.offsetTop
+
+    }
     return (
-        <div className='hero' style={{...xy}}>
+        <div className='hero' style={{ ...xy }}>
             <div className='bloodbar'></div>
-            <div className="herobody"></div>
+            <div
+                className="herobody"
+                ref={bodyref}
+                style={{ transform: 'rotateZ(10deg)' }}
+            ></div>
 
         </div>
     )
 }
 
-const Mousepost = ({X,Y,closd}) => {
+const Mousepost = ({ X, Y, closd }) => {
     return (
-    <div className='mousepost' style={{left:`${X}px`,top:`${Y}px`}}>
+        <div className='mousepost' style={{ left: `${X}px`, top: `${Y}px` }}>
 
-    </div>
+        </div>
     )
 }
 
-export default function Game() {
-    const [移动显示,set移动显示] = useState(false)
-    const [鼠标位置,set鼠标位置] = useState({X:0,Y:0})
 
-    document.oncontextmenu = (e) =>{
-        console.log(e);
-        let {pageX,pageY} = e
-        console.log(pageX,pageY);
+export default function Game() {
+    
+    const [移动显示, set移动显示] = useState(false)
+    const [鼠标位置, set鼠标位置] = useState({ X: 0, Y: 0 })
+
+    document.oncontextmenu = (e) => {
+        let { pageX, pageY } = e
         set移动显示(true)
-        set鼠标位置({X:pageX-20,Y:pageY-20})
+        set鼠标位置({ X: pageX - 20, Y: pageY - 20 })
         return false;
     }
 
     return (
-        
+
         <div className='game'>
-            {移动显示?<Mousepost key={Math.random()} X={鼠标位置.X} Y={鼠标位置.Y}/>:null}
+            {移动显示 ? <Mousepost key={Math.random()} X={鼠标位置.X} Y={鼠标位置.Y} /> : null}
+            <面板 data={关卡面板data}>
+                <属性条 name='关卡' value={1} />
+            </面板>
+            <面板 data={时间面板data}>
+                <GTime/>
+            </面板>
             <面板 data={属性面板data}>
-                <属性条 name='生命值' value={200}/>
-                <属性条 name='魔法值' value={200}/>
-                <属性条 name='体力' value={'100/100'}/>
-                <属性条 name='攻击力' value={20}/>
-                <属性条 name='攻击距离' value={10}/>
-                <属性条 name='经验值' value={'0/100'}/>
-                <属性条 name='等级' value={1}/>
+                <属性条 name='生命值' value={200} />
+                <属性条 name='魔法值' value={200} />
+                <属性条 name='体力' value={'100/100'} />
+                <属性条 name='攻击力' value={20} />
+                <属性条 name='攻击距离' value={10} />
+                <属性条 name='经验值' value={'0/100'} />
+                <属性条 name='等级' value={1} />
             </面板>
             <面板 data={技能面板data}></面板>
-            <英雄/>
+            <英雄 />
         </div>
     )
 }
