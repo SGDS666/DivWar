@@ -32,10 +32,12 @@
   font-weight: bold;
 }
 .game .hero {
+  width: 30px;
+  height: 20px;
   position: absolute;
 }
 .game .hero .bloodbar {
-  width: 6vw;
+  width: 5vw;
   height: 1vh;
   position: absolute;
   top: -2vh;
